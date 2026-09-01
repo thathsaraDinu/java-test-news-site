@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>News App</title>
+</head>
+<body>
+
+<h1>News App</h1>
+
+<h2>Categories</h2>
+
+<div th:each="category : ${categories}">
+    <p th:text="${category.name}"></p>
+</div>
+
+</body>
+</html>

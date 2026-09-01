@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${category.name} + ' News'">
+        News
+    </title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<header>
+    <a href="/categories">← Categories</a>
+
+    <h1 th:text="${category.name}">
+        Category
+    </h1>
+</header>
+
+<main>
+
+    <div class="news-list">
+
+        <article th:each="article : ${news}"
+                 class="news-card">
+
+            <h2>
+                <a th:href="@{/news/{id}(id=${article.id})}"
+                   th:text="${article.title}">
+                    News headline
+                </a>
+            </h2>
+
+            <p th:text="${article.publishedAt}">
+                Date
+            </p>
+
+        </article>
+
+    </div>
+
+</main>
+
+</body>
+</html>

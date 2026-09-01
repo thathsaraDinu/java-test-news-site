@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title th:text="${news.title}">
+        News Article
+    </title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<header>
+    <a href="/categories">← Back to Categories</a>
+</header>
+
+<main>
+
+    <article>
+
+        <h1 th:text="${news.title}">
+            News title
+        </h1>
+
+        <p class="date"
+           th:text="${news.publishedAt}">
+            Date
+        </p>
+
+        <img th:if="${news.imageUrl != null}"
+             th:src="${news.imageUrl}"
+             alt="News image"
+             class="news-image">
+
+        <div class="content"
+             th:text="${news.content}">
+            News content
+        </div>
+
+    </article>
+
+    <section class="comments">
+
+        <h2>Comments</h2>
+
+        <div th:if="${#lists.isEmpty(news.comments)}">
+            <p>No comments yet.</p>
+        </div>
+
+        <div th:each="comment : ${news.comments}"
+             class="comment">
+
+            <strong th:text="${comment.authorName}">
+                Author
+            </strong>
+
+            <p th:text="${comment.content}">
+                Comment
+            </p>
+
+            <small th:text="${comment.createdAt}">
+                Date
+            </small>
+
+        </div>
+
+        <h3>Add a Comment</h3>
+
+        <form th:action="@{/news/{id}/comments(id=${news.id})}"
+              method="post">
+
+            <input type="text"
+                   name="authorName"
+                   placeholder="Your name"
+                   required>
+
+            <textarea name="content"
+                      placeholder="Your comment"
+                      required></textarea>
+
+            <button type="submit">
+                Add Comment
+            </button>
+
+        </form>
+
+    </section>
+
+</main>
+
+</body>
+</html>
